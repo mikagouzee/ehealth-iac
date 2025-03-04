@@ -1,0 +1,8 @@
+resource_group_name = "rg-t7"
+resource_group_location = "West Europe"
+virtual_network_name = "mgzt7vnet"
+subnet_name = "controlplane-subnet-t7"
+public_ip_name = "controlplanepip-t7"
+netwok_security_group_name = "nsg-cp-t7"
+network_interface_name = "nic-controlplane-t7"
+linux_virtual_machine_name = "controlplane"
