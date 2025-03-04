@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        DEV_DIR = 'environments/dev'
+        PROD_DIR = 'environments/prod'
+    }
+    
+    stages {
+        stage('Initialize') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Deploy Front-End') {
+            when {
+                changeset "**/front-end/**"
+            }
+            steps {
+                script {
+                    dir(DEV_DIR) {
+                        sh """
+                            terraform plan -target=module.frontend -var-file=terraform.tfvars
+                        """
+                        sh """
+                            terraform apply -target=module.frontend -auto-approve -var-file=terraform.tfvars
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Back-End') {
+            when {
+                changeset "**/back-end/**"
+            }
+            steps {
+                script {
+                    dir(DEV_DIR) {
+                        sh """
+                            terraform plan -target=module.backend -var-file=terraform.tfvars
+                        """
+                        sh """
+                            terraform apply -target=module.backend -auto-approve -var-file=terraform.tfvars
+                        """
+                    }
+                }
+            }
+        }
+    }
+}

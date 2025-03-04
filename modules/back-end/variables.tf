@@ -32,7 +32,7 @@ variable "subnet_address_prefix" {
   default = "10.0.2.0/24"
 }
 
-variable "netwok_security_group_name" {
+variable "network_security_group_name" {
   type = string
   description = "NSG name in azure"
   default = "nsg-name-default"
@@ -48,4 +48,9 @@ variable "linux_virtual_machine_name" {
   type = string
   description = "Linux VM name in azure"
   default = "back-end"
+}
+
+variable "frontend_subnet_address_prefix" {
+  type = string
+  default = "10.0.1.0/24"
 }

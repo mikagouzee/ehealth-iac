@@ -1,4 +1,4 @@
-resource_group_name = "rg-t7"
+resource_group_name = "ehealth-rg-t7"
 resource_group_location = "West Europe"
 virtual_network_name = "mgzt7vnet"
 subnet_name = "controlplane-subnet-t7"

@@ -11,9 +11,8 @@ module "network" {
   subnet_name = var.subnet_name
   vnet_address_space = var.vnet_address_space
   subnet_address_prefix = var.subnet_address_prefix
-  netwok_security_group_name = var.netwok_security_group_name
+  netwok_security_group_name = var.network_security_group_name
   network_interface_name = var.network_interface_name
-  public_ip_id = azurerm_public_ip.controlIP.id
   security_rules = [
     {
       name                       = "SSH"
@@ -24,7 +23,7 @@ module "network" {
       source_port_range          = "*"
       destination_port_range     = "22"
       source_address_prefix      = "*"
-      destination_address_prefix = "*"
+      destination_address_prefix = var.frontend_subnet_address_prefix
     },
     {
       name                       = "HTTP"
@@ -34,7 +33,7 @@ module "network" {
       protocol                   = "Tcp"
       source_port_range          = "*"
       destination_port_range     = "80"
-      source_address_prefix      = "*"
+      source_address_prefix      = var.frontend_subnet_address_prefix
       destination_address_prefix = "*"
     }
   ]
@@ -46,7 +45,7 @@ resource "azurerm_linux_virtual_machine" "back-end" {
   resource_group_name             = module.rg.name
   network_interface_ids           = [module.network.nicId]
   size                            = "Standard_DS1_v2"
-  computer_name                   = "controlnode"
+  computer_name                   = "backend"
   admin_username                  = "azureuser"
   disable_password_authentication = true
 
@@ -70,4 +69,9 @@ resource "azurerm_linux_virtual_machine" "back-end" {
   
 }
 
-
+resource "local_file" "terraform_output" {
+  content  = jsonencode({
+    backend_private_ip = azurerm_network_interface.nic.private_ip_address
+  })
+  filename = "${path.module}/back-end_output.json"
+}

@@ -15,7 +15,7 @@ resource "azurerm_public_ip" "public_ip" {
   }
 }
 
-data "azurerm_public_ip" "controlIP" {
+data "azurerm_public_ip" "ip" {
   name = azurerm_public_ip.public_ip.name
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -90,4 +90,9 @@ resource "azurerm_linux_virtual_machine" "front-end" {
   
 }
 
-
+resource "local_file" "terraform_output" {
+  content  = jsonencode({
+    frontend_public_ip = azurerm_public_ip.public_ip.ip_address
+  })
+  filename = "${path.module}/front-end_output.json"
+}
