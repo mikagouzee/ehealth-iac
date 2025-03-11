@@ -22,6 +22,10 @@ data "azurerm_public_ip" "ip" {
 
 module "network" {
   source = "../network"
+
+  rg_location = var.resource_group_location
+  rg_name = var.resource_group_name
+
   virtual_network_name = var.virtual_network_name
   subnet_name = var.subnet_name
   vnet_address_space = var.vnet_address_space
@@ -94,5 +98,5 @@ resource "local_file" "terraform_output" {
   content  = jsonencode({
     frontend_public_ip = azurerm_public_ip.public_ip.ip_address
   })
-  filename = "${path.module}/front-end_output.json"
+  filename = "${path.module}/output.json"
 }

@@ -7,6 +7,10 @@ module "rg" {
 
 module "network" {
   source = "../network"
+
+  rg_location = var.resource_group_location
+  rg_name = var.resource_group_name
+
   virtual_network_name = var.virtual_network_name
   subnet_name = var.subnet_name
   vnet_address_space = var.vnet_address_space
@@ -37,6 +41,11 @@ module "network" {
       destination_address_prefix = "*"
     }
   ]
+}
+
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
 
 resource "azurerm_linux_virtual_machine" "back-end" {
@@ -71,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "back-end" {
 
 resource "local_file" "terraform_output" {
   content  = jsonencode({
-    backend_private_ip = azurerm_network_interface.nic.private_ip_address
+    backend_private_ip = module.network.private_ip
   })
-  filename = "${path.module}/back-end_output.json"
+  filename = "${path.module}/output.json"
 }

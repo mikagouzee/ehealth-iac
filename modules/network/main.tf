@@ -1,22 +1,22 @@
 resource "azurerm_virtual_network" "vnet" {
   name                = var.virtual_network_name
   address_space       = [var.vnet_address_space]
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.rg_name
 
 }
 
 resource "azurerm_subnet" "subnet" {
   name                 = var.subnet_name
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = var.rg_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.subnet_address_prefix]
 }
 
 resource "azurerm_network_security_group" "nsg" {
   name                = var.netwok_security_group_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.rg_name
 }
 
 resource "azurerm_network_security_rule" "nsg_rule" {
@@ -37,8 +37,8 @@ resource "azurerm_network_security_rule" "nsg_rule" {
 
 resource "azurerm_network_interface" "nic" {
   name                = var.network_interface_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.rg_name
 
   ip_configuration {
     name                          = "myNicConfig"

@@ -47,3 +47,11 @@ variable "security_rules" {
   }))
   default = []
 }
+
+variable "rg_location" {
+  type = string
+}
+
+variable "rg_name" {
+  type = string
+}
