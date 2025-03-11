@@ -1,0 +1,6 @@
+resource_group_name = "ehealth-DEV-rg-t7"
+resource_group_location = "West Europe"
+virtual_network_name = "ehealth-vnet-t7"
+subnet_name = "ehealth-subnet-t7"
+network_security_group_name = "nsg-ehealth-t7"
+network_interface_name = "nic-ehealth-t7"
