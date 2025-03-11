@@ -7,7 +7,6 @@ variable "resource_group_name" {
 variable "resource_group_location" {
   type = string
   description = "rg location in azure"
-  default = "my-rg-location-default"
 }
 
 variable "virtual_network_name" {
