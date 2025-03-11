@@ -27,7 +27,7 @@ module "network" {
       source_port_range          = "*"
       destination_port_range     = "22"
       source_address_prefix      = "*"
-      destination_address_prefix = var.frontend_subnet_address_prefix
+      destination_address_prefix = "*"
     },
     {
       name                       = "HTTP"
