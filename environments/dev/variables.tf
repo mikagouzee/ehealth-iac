@@ -1,7 +1,6 @@
 variable "resource_group_name" {
   type = string
   description = "RG name in Azure"
-  default = "my-rg-default"
 }
 
 variable "resource_group_location" {
@@ -46,7 +45,6 @@ variable "network_interface_name" {
 variable "linux_virtual_machine_name" {
   type = string
   description = "Linux VM name in azure"
-  default = "back-end"
 }
 
 variable "frontend_subnet_address_prefix" {

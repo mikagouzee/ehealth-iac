@@ -41,6 +41,7 @@ module "network" {
       destination_address_prefix = "*"
     }
   ]
+  depends_on = [ module.rg ]
 }
 
 resource "tls_private_key" "ssh_key" {
