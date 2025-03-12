@@ -11,23 +11,19 @@ variable "resource_group_location" {
 variable "virtual_network_name" {
   type = string
   description = "vnet in azure"
-  default = "my-vnet-default"
 }
 
 variable "subnet_name" {
   type = string
   description = "Subnet name in azure"
-  default = "my-subnet-default"
 }
 
 variable "vnet_address_space" {
   type = string
-  default = "10.0.0.0/16"
 }
 
 variable "subnet_address_prefix" {
   type = string
-  default = "10.0.2.0/24"
 }
 
 variable "network_security_group_name" {
@@ -49,5 +45,5 @@ variable "linux_virtual_machine_name" {
 
 variable "frontend_subnet_address_prefix" {
   type = string
-  default = "10.0.1.0/24"
+  default = "10.5.1.0/24"
 }
