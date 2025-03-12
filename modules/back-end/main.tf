@@ -1,9 +1,9 @@
-module "rg" {
-  source = "../resource-group"
+# module "rg" {
+#   source = "../resource-group"
 
-  resource_group_name     = var.resource_group_name
-  resource_group_location = var.resource_group_location
-}
+#   resource_group_name     = var.resource_group_name
+#   resource_group_location = var.resource_group_location
+# }
 
 module "network" {
   source = "../network"
@@ -51,8 +51,8 @@ resource "tls_private_key" "ssh_key" {
 
 resource "azurerm_linux_virtual_machine" "back-end" {
   name                            = var.linux_virtual_machine_name
-  location                        = module.rg.location
-  resource_group_name             = module.rg.name
+  location                        = var.resource_group_location
+  resource_group_name             = var.resource_group_name
   network_interface_ids           = [module.network.nicId]
   size                            = "Standard_DS1_v2"
   computer_name                   = "backend"
