@@ -75,7 +75,7 @@ resource "azurerm_linux_virtual_machine" "front-end" {
   disable_password_authentication = true
 
   os_disk {
-    name                 = "myOsDisk"
+    name                 = "frontend-Disk"
     caching              = "ReadWrite"
     storage_account_type = "Premium_LRS"
   }

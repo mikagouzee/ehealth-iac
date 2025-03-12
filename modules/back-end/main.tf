@@ -52,7 +52,7 @@ resource "azurerm_linux_virtual_machine" "back-end" {
   disable_password_authentication = true
 
   os_disk {
-    name                 = "myOsDisk"
+    name                 = "backend-Disk"
     caching              = "ReadWrite"
     storage_account_type = "Premium_LRS"
   }

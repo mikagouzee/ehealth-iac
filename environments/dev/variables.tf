@@ -29,13 +29,11 @@ variable "subnet_address_prefix" {
 variable "network_security_group_name" {
   type = string
   description = "NSG name in azure"
-  default = "nsg-name-default"
 }
 
 variable "network_interface_name" {
   type = string
   description = "NIC name in azure"
-  default = "my-nic-default"
 }
 
 variable "linux_virtual_machine_name" {
