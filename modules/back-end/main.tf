@@ -1,10 +1,3 @@
-# module "rg" {
-#   source = "../resource-group"
-
-#   resource_group_name     = var.resource_group_name
-#   resource_group_location = var.resource_group_location
-# }
-
 module "network" {
   source = "../network"
 
@@ -41,7 +34,6 @@ module "network" {
       destination_address_prefix = "*"
     }
   ]
-  depends_on = [ module.rg ]
 }
 
 resource "tls_private_key" "ssh_key" {
